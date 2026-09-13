@@ -1,0 +1,16 @@
+<div class="mx-auto max-w-md w-full py-24 px-4 text-center">
+  <h1 class="text-xl font-semibold text-slate-900">Redirecting you to secure payment&hellip;</h1>
+  <p class="mt-2 text-slate-600">Please don't close this page.</p>
+
+  <%# form_with/form_tag always force accept-charset="UTF-8": Nexi requires
+      ISO-8859-1, so the <form> tag has to be written by hand here. %>
+  <form id="nexi-payment-form" method="post" action="<%= @payment_form_url %>" accept-charset="ISO-8859-1">
+    <% @payment_params.each do |name, value| %>
+      <%= hidden_field_tag name, value, id: nil %>
+    <% end %>
+  </form>
+</div>
+
+<script>
+  document.getElementById("nexi-payment-form").submit();
+</script>
