@@ -40,6 +40,11 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
+  # Nexi can't reach localhost, so testing the /nexi/notify webhook end-to-end
+  # requires a public tunnel (ngrok). Without this, ActionDispatch::HostAuthorization
+  # rejects the request with "Blocked hosts" before it ever reaches the controller.
+  config.hosts << /.*\.ngrok-free\.(app|dev)/
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
