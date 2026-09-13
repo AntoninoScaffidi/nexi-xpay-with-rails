@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_13_063729) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_13_063823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "order_payment_notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "mac_verified", default: false, null: false
+    t.bigint "order_id", null: false
+    t.string "outcome"
+    t.boolean "processed", default: false, null: false
+    t.jsonb "raw_params", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_payment_notifications_on_order_id"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -45,5 +56,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_13_063729) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "order_payment_notifications", "orders"
   add_foreign_key "orders", "products"
 end

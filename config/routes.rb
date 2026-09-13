@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   resources :products, only: [ :index, :show ]
-  resources :orders, only: [ :new, :create ], param: :order_number
+  resources :orders, only: [ :new, :create, :show ], param: :order_number
 
   get "nexi/return", to: "nexi_callbacks#return", as: :nexi_return
   post "nexi/notify", to: "nexi_callbacks#notify", as: :nexi_notify

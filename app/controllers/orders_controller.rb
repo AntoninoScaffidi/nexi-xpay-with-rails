@@ -29,6 +29,10 @@ class OrdersController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  def show
+    @order = Order.find_by!(order_number: params[:order_number])
+  end
+
   private
 
   def set_product

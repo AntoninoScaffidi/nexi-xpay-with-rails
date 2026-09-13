@@ -1,0 +1,19 @@
+<div class="rounded-lg border border-slate-200 bg-white p-6">
+  <p class="text-sm text-slate-500">Order <%= @order.order_number %></p>
+  <h1 class="mt-1 text-2xl font-bold text-slate-900"><%= @order.product.name %></h1>
+  <p class="mt-1 text-slate-600">&euro;<%= "%.2f" % @order.total_amount %></p>
+
+  <div class="mt-6">
+    <% if @order.paid? %>
+      <p class="rounded-lg bg-green-50 px-4 py-3 text-green-800">&#10003; Payment confirmed. Thank you!</p>
+    <% elsif @order.pending_payment? %>
+      <p class="rounded-lg bg-amber-50 px-4 py-3 text-amber-800">
+        Payment in progress. If you already completed it, try reloading this page in a few seconds.
+      </p>
+    <% else %>
+      <p class="rounded-lg bg-red-50 px-4 py-3 text-red-800">
+        <%= @order.status_label %>. Please try the checkout again.
+      </p>
+    <% end %>
+  </div>
+</div>
